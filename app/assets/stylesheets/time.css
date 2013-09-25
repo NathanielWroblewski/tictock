@@ -1,0 +1,38 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Grotesk';
+  src: url('fonts/grotesk.ttf');
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: #0B486B;
+  padding-top: 50px;
+  font-family: 'Grotesk', 'Georgia', serif;
+  text-align: center;
+}
+
+.container .tic {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 180px;
+  color: #79BD9A;
+}
+.container .tock {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 180px;
+  color: #CFF09E;
+}
+
+.container #clock {
+  text-align: center;
+  display: inline-block;
+}
