@@ -3,6 +3,7 @@ Clock::Application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
@@ -28,6 +29,11 @@ Clock::Application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = false
+  config.assets.precompile << Proc.new { |path|
+  if path =~ /\.(eot|svg|ttf|woff)\z/
+    true
+  end
+}
 
   # Generate digests for assets URLs.
   config.assets.digest = true

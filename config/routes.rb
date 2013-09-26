@@ -1,8 +1,8 @@
 Clock::Application.routes.draw do
 
-  root to: 'times#index'
+  root to: 'places#index'
 
-  resources :times
+  resources :places
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

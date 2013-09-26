@@ -10,7 +10,6 @@ class Time.LogoView extends Backbone.View
     @canvas = Raphael 'clock', @width, @width
     @clockface = @canvas.circle @half, @half, @width * .475
     $(window).on 'resize', @rerender
-    debugger
 
   render: ->
     @windClock()

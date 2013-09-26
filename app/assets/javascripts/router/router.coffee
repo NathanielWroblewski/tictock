@@ -7,9 +7,12 @@ class Time.Router extends Backbone.Router
     @clockView = new Time.ClockView
       model: @clock
     @logoView = new Time.LogoView()
+    @placesView = new Time.PlacesView
+      el: '.places-form'
     @clockView.render()
-    $('#app').append @clockView.el
+    @placesView.render()
     @logoView.render()
+    $('#app').append @placesView.el
     $('#clock').append @logoView.el
 
   start: ->
