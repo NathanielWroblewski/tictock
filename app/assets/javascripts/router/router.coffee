@@ -29,5 +29,4 @@ class Time.Router extends Backbone.Router
 
 $ ->
   time = new Time.Router()
-  debugger
   time.start()

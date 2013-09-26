@@ -15,6 +15,7 @@
 //= require underscore
 //= require turbolinks
 //= require_tree .
+//= require modernizr
 //= require backbone
 //= require foundation
 

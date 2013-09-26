@@ -14,7 +14,7 @@ html, body {
   height: 100%;
   width: 100%;
   background-color: #0B486B;
-  padding-top: 50px;
+  padding: 50px 5px;
   font-family: 'Grotesk', 'Georgia', serif;
   text-align: center;
 }
@@ -22,13 +22,13 @@ html, body {
 .container .tic {
   margin-top: 10px;
   text-align: center;
-  font-size: 180px;
+  font-size: 100px;
   color: #3B8686;
 }
 .container .tock {
   margin-top: 10px;
   text-align: center;
-  font-size: 180px;
+  font-size: 100px;
   color: #CFF09E;
 }
 
@@ -37,4 +37,33 @@ html, body {
   display: inline-block;
 }
 
+/* We use this media query to add styles to any device that supports media queries */
+@media only screen { }
 
+/* Used to alter styles for screens at least 768px wide. This is where the grid changes. */
+@media only screen and (min-width: 768px) {
+  .container .tic {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 180px;
+    color: #3B8686;
+  }
+  .container .tock {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 180px;
+    color: #CFF09E;
+  }
+}
+
+/* Used to alter styles for screens at least 1280px wide. */
+@media only screen and (min-width: 1280px) {}
+
+/* Used to alter styles for screens at least 1440px wide. */
+@media only screen and (min-width: 1440px) {}
+
+/* Apply styles to screens in landscape orientation */
+@media only screen and (orientation: landscape) {}
+
+/* Apply styles to screens in portrait orientation */
+@media only screen and (orientation: portrait) {}

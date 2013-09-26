@@ -3,15 +3,20 @@ window.Time or= {}
 class Time.LogoView extends Backbone.View
 
   initialize: ->
-    @width = 85
+    @width = @calculateWidth()
     @half  = @width * .5
     @face  = '#CFF09E'
     @hands = '#3B8686'
     @canvas = Raphael 'clock', @width, @width
     @clockface = @canvas.circle @half, @half, @width * .475
+    $(window).on 'resize', @rerender
+    debugger
 
   render: ->
     @windClock()
+
+  events:
+    'window resize': 'updateClockSize'
 
   windClock: ->
     @renderClock()
@@ -72,3 +77,19 @@ class Time.LogoView extends Backbone.View
     @hour_hand.rotate 30 * hours + (minutes/2.5), @half, @half
     @minute_hand.rotate 6 * minutes, @half, @half
     @second_hand.rotate 6 * seconds, @half, @half
+
+  calculateWidth: ->
+    if Modernizr.mq 'only screen and (max-width: 768px)'
+      45
+    else
+      85
+
+  rerender: =>
+    @remove()
+    @initialize()
+    @render()
+
+  remove: ->
+    $(window).off 'resize', @rerender
+    $(document).find('svg').remove()
+
