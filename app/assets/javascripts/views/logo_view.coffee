@@ -7,8 +7,8 @@ class Time.LogoView extends Backbone.View
     @half  = @width * .5
     @face  = '#CFF09E'
     @hands = '#3B8686'
-
-  el: '#clock'
+    @canvas = Raphael 'clock', @width, @width
+    @clockface = @canvas.circle @half, @half, @width * .475
 
   render: ->
     @windClock()
@@ -19,43 +19,41 @@ class Time.LogoView extends Backbone.View
     setInterval @updateClock, 1000
 
   renderClock: ->
-    canvas = Raphael 'clock', @width, @width
-    clockface = canvas.circle @half, @half, @width * .475
-    hour_hand = canvas.path 'M' + @half + ' ' + @half +
+    @hour_hand = @canvas.path 'M' + @half + ' ' + @half +
       'L' + @half + ' ' + @half * .5
-    minute_hand = canvas.path 'M' + @half + ' ' + @half +
+    @minute_hand = @canvas.path 'M' + @half + ' ' + @half +
       'L' + @half + ' ' + @width * .2
-    second_hand = canvas.path 'M' + @half + ' ' + @width * .55 +
+    @second_hand = @canvas.path 'M' + @half + ' ' + @width * .55 +
       'L' + @half + ' ' + @width * .125
-    center_pin = canvas.circle @half, @half, @width * .025
+    @center_pin = @canvas.circle @half, @half, @width * .025
 
-    for number in (0..11)
-      start_x = cosPath number
-      start_y = sinPath number
-      end_x = cosPath number
-      end_y = sinPath number
+    for number in [0..11]
+      start_x = @cosPath number
+      start_y = @sinPath number
+      end_x = @cosPath number
+      end_y = @sinPath number
 
-      hour_tick = canvas.path 'M' + start_x + ' ' +
+      @hour_tick = @canvas.path 'M' + start_x + ' ' +
         start_y + 'L' + end_x + ' ' + end_y
 
       @colorClock()
 
   colorClock: ->
-    clock.attr
+    @clockface.attr
       'fill': @face
       'stroke': @hands
       'stroke-width': @width * .015
-    hour_tick.attr 'stroke', @hands
-    hour_hand.attr
+    @hour_tick.attr 'stroke', @hands
+    @hour_hand.attr
       'stroke': @hands
       'stroke-width': @width * .03
-    minute_hand.attr
+    @minute_hand.attr
       'stroke': @hands
       'stroke-width': @width * .02
-    second_hand.attr
+    @second_hand.attr
       'stroke': @hands
       'stroke-width': @width * .01
-    center_pin.attr
+    @center_pin.attr
       'fill': @hands
       'stroke': @hands
 
@@ -65,12 +63,12 @@ class Time.LogoView extends Backbone.View
   cosPath: (num) ->
     @half + Math.round((@width * .4) * Math.cos(30 * num * Math.PI/180))
 
-  updateClock: ->
+  updateClock: =>
     now = new Date()
     hours = now.getHours()
     minutes = now.getMinutes()
     seconds = now.getSeconds()
 
-    hour_hand.rotate 30 * hours + (minutes/2.5), @half, @half
-    minute_hand.rotate 6 * minutes, @half, @half
-    second_hand.rotate 6 * seconds, @half, @half
+    @hour_hand.rotate 30 * hours + (minutes/2.5), @half, @half
+    @minute_hand.rotate 6 * minutes, @half, @half
+    @second_hand.rotate 6 * seconds, @half, @half

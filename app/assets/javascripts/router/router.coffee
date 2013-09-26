@@ -6,8 +6,11 @@ class Time.Router extends Backbone.Router
     @clock = new Time.Clock()
     @clockView = new Time.ClockView
       model: @clock
+    @logoView = new Time.LogoView()
     @clockView.render()
     $('#app').append @clockView.el
+    @logoView.render()
+    $('#clock').append @logoView.el
 
   start: ->
     Backbone.history.start
@@ -17,9 +20,10 @@ class Time.Router extends Backbone.Router
     '': 'index'
 
   index: ->
-    console.log 'hey'
     @clockView.render()
     $('#app').append @clockView.el
+    @logoView.render()
+    $('#clock').append @logoView.el
 
 
 
