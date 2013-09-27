@@ -8,7 +8,7 @@
   .row.places-form
     =form_tag '/' do
       .small-offset-2.small-20.large-offset-6.large-8.columns
-        =text_field_tag :location, '', placeholder: 'location', id: 'search-places'
+        =text_field_tag :location, '', id: 'search-places'
       .hide-for-small.large-4.columns
         =submit_tag 'Submit', class: 'button radius'
       .row.show-for-small
