@@ -3,12 +3,10 @@ class PlacesController < ApplicationController
   def index
   end
 
-  def create
-    Geocoder.configure(timeout: 300)
-    latlong = Geocoder.coordinates(params[:place])
-    timezone = Timezone::Zone.new(latlon: latlong)
+  def show
+    city = params[:place]
+    time = fetch_time_for_city(city)
 
-    render json: { time: timezone.time(Time.now) }
+    render json: {id: 1, time: time, place: city}
   end
-
 end

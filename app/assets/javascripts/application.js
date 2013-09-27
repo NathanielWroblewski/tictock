@@ -19,4 +19,6 @@
 //= require backbone
 //= require foundation
 
-$(document).foundation();
+$(document).ready(function(){
+  $(document).foundation();
+});

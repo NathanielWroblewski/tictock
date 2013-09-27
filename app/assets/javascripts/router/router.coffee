@@ -3,16 +3,14 @@ window.Time or= {}
 class Time.Router extends Backbone.Router
 
   initialize: ->
-    @clock = new Time.Clock()
-    @clockView = new Time.ClockView
-      model: @clock
+    @places = new Time.Place()
     @logoView = new Time.LogoView()
-    @placesView = new Time.PlacesView
+    @placeView = new Time.PlaceView
       el: '.places-form'
-    @clockView.render()
-    @placesView.render()
+      model: @places
+    @placeView.render()
     @logoView.render()
-    $('#app').append @placesView.el
+    $('#app').append @placeView.el
     $('#clock').append @logoView.el
 
   start: ->
@@ -23,8 +21,8 @@ class Time.Router extends Backbone.Router
     '': 'index'
 
   index: ->
-    @clockView.render()
-    $('#app').append @clockView.el
+    @placeView.render()
+    $('#app').append @placeView.el
     @logoView.render()
     $('#clock').append @logoView.el
 

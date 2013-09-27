@@ -1,8 +1,11 @@
 window.Time or= {}
 
-class Time.PlacesView extends Backbone.View
+class Time.PlaceView extends Backbone.View
 
   intialize: ->
+
+  model: ->
+    new Time.Place()
 
   render: ->
 
@@ -16,10 +19,18 @@ class Time.PlacesView extends Backbone.View
 
   events:
     'submit form': 'fetchLocation'
+    'reset': 'alertTime'
+
+  alertTime: ->
+    alert @model.time
+    alert @model.place
 
   fetchLocation: (event) ->
     event.preventDefault()
-    @.revealResults()
+    @model.place = $('#search-places').val()
+    @model.fetch
+      id: 1
+      place: @model.place
 
   revealResults: ->
     @$el.append @template()
