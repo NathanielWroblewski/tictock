@@ -18,7 +18,3 @@
 //= require modernizr
 //= require backbone
 //= require foundation
-
-$(document).ready(function(){
-  $(document).foundation();
-});

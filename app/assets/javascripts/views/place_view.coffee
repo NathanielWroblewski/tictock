@@ -2,35 +2,52 @@ window.Time or= {}
 
 class Time.PlaceView extends Backbone.View
 
-  intialize: ->
-
-  model: ->
-    new Time.Place()
+  initialize: ->
+    @place = ''
+    @time = ''
+    @url = ''
 
   render: ->
 
   template: ->
-    _.template ''+
-      '<div class="row">' +
-        '<div class="small-offset-1 small-10 columns results"'+
-          '<h1>Results</h1>' +
+    _.template '' +
+        '<div class="row show-for-small hide-for-large">' +
+          '<div class="small-offset-2 small-20 columns">' +
+            "<h1>#{@place}</h1>" +
+          '</div>' +
+        '</div>' +
+        '<div class="row show-for-small hide-for-large">' +
+          '<div class="small-offset-2 small-20 columns">' +
+            "<h1>#{@time}</h1>" +
+          '</div>' +
+        '</div>' +
+        '<div class="row hide-for-small show-for-large">' +
+          '<div class="large-6 columns city">' +
+            "<h3>#{@place}</h3>" +
+          '</div>' +
+          '<div class="large-18 columns timebox-container">' +
+            '<ul class="large-block-grid-24">' +
+              @timeline() +
+            '</ul>' +
+          '</div>' +
         '</div>' +
       '</div>'
 
   events:
     'submit form': 'fetchLocation'
-    'reset': 'alertTime'
-
-  alertTime: ->
-    alert @model.time
-    alert @model.place
 
   fetchLocation: (event) ->
     event.preventDefault()
-    @model.place = $('#search-places').val()
-    @model.fetch
-      id: 1
-      place: @model.place
+    @place = $('#search-places').val()
+    @url = '/places/' + encodeURIComponent($('#search-places').val())
+    $.get @url, (data) =>
+        @.time = data.time
+        @.revealResults()
 
   revealResults: ->
-    @$el.append @template()
+    $('.results').append @template()
+
+  timeline: ->
+    hours = []
+    hours.push("#{'<li><h3>' + (num%12 + 1) + '</h3></li>'}") for num in [0..23]
+    hours.join ''

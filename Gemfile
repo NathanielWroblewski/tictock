@@ -16,6 +16,10 @@ gem 'timezone'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
+group :development do
+  gem 'pry'
+end
+
 group :doc do
   gem 'sdoc', require: false
 end

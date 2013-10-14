@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def time_in_timezone(latlong)
-    Timezone::Zone.new(latlon: latlong)
+    zone = Timezone::Zone.new(latlon: latlong)
+    zone.time(Time.now)
   end
 end
