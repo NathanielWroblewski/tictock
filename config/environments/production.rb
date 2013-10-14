@@ -28,7 +28,7 @@ Clock::Application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
   config.assets.precompile << Proc.new { |path|
   if path =~ /\.(eot|svg|ttf|woff)\z/
     true
@@ -82,5 +82,8 @@ Clock::Application.configure do
   # config.autoflush_log = false
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.serve_static_assets = true
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect'
+  config.assets.compile = true
   config.log_formatter = ::Logger::Formatter.new
 end
