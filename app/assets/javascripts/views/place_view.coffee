@@ -41,7 +41,7 @@ class Time.PlaceView extends Backbone.View
     @place = $('#search-places').val()
     @url = '/places/' + encodeURIComponent($('#search-places').val())
     $.get @url, (data) =>
-      @smalltime = data.time.substring 11, data.time.length - 4
+      @smalltime = data.time.substring 11, data.time.length - 7
       @bigtime = parseInt data.time.substring(11, 13)
       @revealResults()
 
