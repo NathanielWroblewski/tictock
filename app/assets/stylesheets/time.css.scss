@@ -78,6 +78,7 @@ html, body {
 .container .city {
   text-align: right;
   color: #CFF09E;
+  margin-top: 8px;
 }
 
 .container .small-city {
@@ -90,6 +91,7 @@ html, body {
 
 .container .now {
   color: #CFF09E;
+  margin-bottom: 0;
 }
 /* We use this media query to add styles to any device that supports media queries */
 @media only screen { }
@@ -116,6 +118,14 @@ html, body {
     padding-left:30px;
     background-attachment: absolute;
     background-position: 7px 7px;
+  }
+
+  .container .ampm {
+    font-size: 8px;
+  }
+
+  .container .hour {
+    margin-bottom: 0;
   }
 }
 

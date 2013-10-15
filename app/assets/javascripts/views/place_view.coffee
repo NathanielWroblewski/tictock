@@ -41,8 +41,8 @@ class Time.PlaceView extends Backbone.View
     @place = $('#search-places').val()
     @url = '/places/' + encodeURIComponent($('#search-places').val())
     $.get @url, (data) =>
-      @smalltime = data.time.substring 11, data.time.length - 7
-      @bigtime = parseInt data.time.substring(11, 13)
+      @smalltime = @formatSmallTime(data.time)
+      @bigtime =  parseInt data.time.substring(11, 13)
       @revealResults()
 
   revealResults: ->
@@ -51,7 +51,12 @@ class Time.PlaceView extends Backbone.View
   timeline: ->
     hours = []
     for num in [0..23]
-      color = ''
-      color = 'now' if @bigtime is num
-      hours.push("#{'<li><h3 class=' + color + '>' + (num%12 + 1) + '</h3></li>'}")
+      color = if @bigtime is num then 'now' else 'hour'
+      ampm = if num < 11 or num == 23 then 'am' else 'pm'
+      hours.push "#{'<li><h3 class=' + color + '>' + (num % 12 + 1) +
+        '</h3><p class="ampm ' + color + '">' + ampm + '</p></li>'}"
     hours.join ''
+
+  formatSmallTime: (time) ->
+    start = time[11] is 0 ? 12 : 11
+    time.substring(start, time.length - 7)
