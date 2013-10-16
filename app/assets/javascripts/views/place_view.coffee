@@ -58,5 +58,5 @@ class Time.PlaceView extends Backbone.View
     hours.join ''
 
   formatSmallTime: (time) ->
-    start = time[11] is 0 ? 12 : 11
-    time.substring(start, time.length - 7)
+    start = if time[11] is 0 then 12 else 11
+    time.substring(start, 16)
