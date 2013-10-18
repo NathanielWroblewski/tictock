@@ -40,7 +40,9 @@ class Time.PlaceView extends Backbone.View
     event.preventDefault()
     @place = $('#search-places').val()
     @url = '/places/' + encodeURIComponent($('#search-places').val())
+    $('.submit').attr 'disabled', 'disabled'
     $.get @url, (data) =>
+      $('.submit').removeAttr 'disabled'
       @smalltime = @formatSmallTime(data.time)
       @bigtime =  parseInt data.time.substring(11, 13)
       @revealResults()
@@ -55,6 +57,7 @@ class Time.PlaceView extends Backbone.View
       ampm = if num < 11 or num == 23 then 'am' else 'pm'
       hours.push "#{'<li><h3 class=' + color + '>' + (num % 12 + 1) +
         '</h3><p class="ampm ' + color + '">' + ampm + '</p></li>'}"
+    # hours.slice(offset, 23).concat hours.slice(0, offset)
     hours.join ''
 
   formatSmallTime: (time) ->
